@@ -1,6 +1,8 @@
 # -*- coding:utf-8 -*-
 # 程序的mongo地址
-MONGODB_URL = 'mongodb://192.168.0.31:32017/MOOP'
+MONGODB_URI = 'mongodb://192.168.0.31:32017'
+SERVER_MONGODB_NAME = 'MOOP'
+SERVICE_MONGODB_NAME = 'MOOP_SERVICE'
 # 租户service的地址
 # MOOP_TENANT_SERVICE_URL = 'http://192.168.0.31:31778/service/v1/tenants'
 MOOP_TENANT_SERVICE_URL = 'http://192.168.0.129:7778/service/v1/tenants'
