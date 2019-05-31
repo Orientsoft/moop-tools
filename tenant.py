@@ -195,17 +195,3 @@ class Tenant:
                 print('PVC创建失败原因：', resp.text)
                 raise
 
-
-# if __name__ == '__main__':
-#     tenant = Tenant({'name': '测试租户', 'namespace': 'moop-test', 'remark': '测试租户的简介描述'})
-#     try:
-#         # 1.创建租户账号
-#         tenant.createTenant()
-#         # 2.增加pv
-#         tenant.addPV()
-#         # 3.增加PVC
-#         tenant.addPVC()
-#     except:
-#         print('租户创建失败，回滚')
-#         tenant.deleteTenant()
-#         tenant.deleteVoume()

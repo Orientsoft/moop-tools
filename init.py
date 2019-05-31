@@ -197,7 +197,8 @@ def addAdmin():
 
 if __name__ == '__main__':
     # 租户初始化
-    tenant = Tenant({'name': '测试租户', 'namespace': 'moop-test', 'remark': '测试租户的简介描述'})
+    import os
+    tenant = Tenant({'name': os.environ['TENANTNAME'], 'namespace': os.environ['NAMESPACE'], 'remark': os.environ['TENANTREMARK']})
     try:
         # 1.创建租户账号
         tenant.createTenant()
