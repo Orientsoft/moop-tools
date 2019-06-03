@@ -178,7 +178,7 @@ def temp():
         "key": "e35bece6c5e6e0e86ca51d0440e92282a9d6ac8a",
         "role": 2,
         "remark": "租户管理员",
-        "invitation": "000000",
+        "invitation": "666666",
         "delete": False
     })
 
