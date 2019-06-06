@@ -3,6 +3,8 @@ db_name_space="database"
 share_namespace="moop-share-services"
 private_namespace="moop-lab" #按需要修改
 
+export SERVER_MONGODB_NAME='MOOP'
+export SERVICE_MONGODB_NAME='MOOP_SERVICE'
 export TENANTNAME='Orient'  #按需修改
 export TENANTREMARK='测试租户的简介描述'  #按需修改
 

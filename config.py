@@ -2,8 +2,8 @@
 import os
 # 程序的mongo地址
 MONGODB_URI = 'mongodb://{}:{}'.format(os.environ['MONGODB_IP'],os.environ['MONGODB_PORT'])
-SERVER_MONGODB_NAME = 'MOOP'
-SERVICE_MONGODB_NAME = 'MOOP_SERVICE'
+SERVER_MONGODB_NAME = os.environ['SERVER_MONGODB_NAME']
+SERVICE_MONGODB_NAME = os.environ['SERVICE_MONGODB_NAME']
 # 租户service的地址
 MOOP_TENANT_SERVICE_URL = 'http://{}:{}/service/v1/tenants'.format(os.environ['TENANT_SERVICE_IP'],os.environ['TENANT_SERVICE_PORT'])
 # project service的地址

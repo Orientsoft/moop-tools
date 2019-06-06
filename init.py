@@ -10,33 +10,11 @@ connect = MongoClient(config.MONGODB_URI)
 # 临时初始化工作，后续交给各自的用户实现
 def temp():
     '''
-        tag        ---   tenant admin
         category   --   super admin
         type       --   super admin
-        租户管理员  --- super admin
     '''
     servicedb = connect[config.SERVICE_MONGODB_NAME]
     serverdb = connect[config.SERVER_MONGODB_NAME]
-    # tag
-    tags = [
-        {
-            "name": "基础学习",
-            "delete": False
-        },
-        {
-            "name": "编程学习",
-            "delete": False
-        },
-        {
-            "name": "自然科学",
-            "delete": False
-        },
-        {
-            "name": "金融科学",
-            "delete": False
-        }
-    ]
-    serverdb.tag.insert_many(tags)
     # category
     categorys = [
         {
@@ -172,47 +150,5 @@ def temp():
             "delete": False
         }]
     servicedb.type.insert_many(types)
-    # 租户管理员
-    serverdb.user.insert({
-        "name": "admin",
-        "key": "e35bece6c5e6e0e86ca51d0440e92282a9d6ac8a",
-        "role": 2,
-        "remark": "租户管理员",
-        "invitation": "666666",
-        "delete": False
-    })
 
 
-def addAdmin():
-    db = connect[config.SERVER_MONGODB_NAME]
-    db.user.insert({
-        "name": "super",
-        "key": "e35bece6c5e6e0e86ca51d0440e92282a9d6ac8a",
-        "role": 0,
-        "remark": "超级管理员",
-        "invitation": "000000",
-        "delete": False
-    })
-
-
-if __name__ == '__main__':
-    # 租户初始化
-    import os
-    tenant = Tenant({'name': os.environ['TENANTNAME'], 'namespace': os.environ['NAMESPACE'], 'remark': os.environ['TENANTREMARK']})
-    try:
-        # 1.创建租户账号
-        tenant.createTenant()
-        # 2.增加pv
-        tenant.addPV()
-        # 3.增加PVC
-        tenant.addPVC()
-    except:
-        print('租户创建失败，回滚')
-        tenant.deleteTenant()
-        tenant.deleteVoume()
-
-    # 创建超级管理员
-    addAdmin()
-
-    # 初始化临时文件
-    temp()
