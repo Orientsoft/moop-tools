@@ -23,7 +23,7 @@ def imageAdd(data):
         print(x)
     print('镜像拉取成功')
     print('需要手工到其他节点上执行：')
-    print('docker pull',repo)
+    print('docker pull '+repo)
     servicedb.image.insert({
         'url': repo,
         'desc': data['desc'],
