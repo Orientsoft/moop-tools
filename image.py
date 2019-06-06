@@ -11,7 +11,8 @@ connect = MongoClient(config.MONGODB_URI)
 # 创建image
 def imageAdd(data):
     servicedb = connect[config.SERVICE_MONGODB_NAME]
-    image = servicedb.image.find_one({'url': data['url']})
+    repo = data['url']+data['tag']
+    image = servicedb.image.find_one({'url': repo})
     if image:
         return '镜像已存在'
     print('=' * 30)
@@ -22,7 +23,7 @@ def imageAdd(data):
         print(x)
     print('镜像拉取成功')
     servicedb.image.insert({
-        'url': data['url']+data['tag'],
+        'url': repo,
         'desc': data['desc'],
         'package': data['package'],
         'delete': False
