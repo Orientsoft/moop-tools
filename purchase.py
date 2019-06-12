@@ -23,13 +23,13 @@ def purchaseAdd(data):
 def getProject():
     projects = servicedb.project.find({"delete": False})
     for p in projects:
-        print('project编号：{}，标题：{}，github地址：{}'.format(str(p['_id']), p['title'], p['spec']))
+        print('project编号：{}，标题：{}，github地址：{}'.format(str(p['_id']), str(p['title']), str(p['spec'])))
 
 
 def getTenant():
     tenants = servicedb.tenant.find({"delete": False})
     for t in tenants:
-        print('租户编号：{}，名称：{}，namespace：{}'.format(str(t['_id']), t['name'], t['namespace']))
+        print('租户编号：{}，名称：{}，namespace：{}'.format(str(t['_id']), str(t['name']), str(t['namespace'])))
 
 
 if __name__ == '__main__':
