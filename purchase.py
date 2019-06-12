@@ -16,7 +16,7 @@ def purchaseAdd(data):
     tenant = servicedb.tenant.find_one({'_id': data['purchaser'],"delete": False})
     if not tenant:
         return '租户不存在'
-    servicedb.image.insert(data)
+    servicedb.purchase.insert(data)
     return '创建成功'
 
 
@@ -37,20 +37,20 @@ if __name__ == '__main__':
     print('=' * 30)
     print('所有租户信息如下：')
     getTenant()
-    tenant = input('请输入购买的租户编号，：')
+    tenant = raw_input('请输入购买的租户编号，：')
     # 拉取所有的project
     print('=' * 30)
     print('所有的project信息如下：')
     getProject()
-    projectid = input('请输入购买的project编号：')
+    projectid = raw_input('请输入购买的project编号：')
     # limit时间
-    limit = input('请输入购买到期时间，格式：2019-05-23  ：')
+    limit = raw_input('请输入购买到期时间，格式：2019-05-23  ：')
     try:
     # 购买purchase
         data = {
             "purchaser": ObjectId(tenant),
             "project": ObjectId(projectid),
-            "limit":limit,
+            "limit":datetime.datetime.strptime(limit, "%Y-%m-%d"),
             "remark": "",
             "createdAt": datetime.datetime.now(),
             "updatedAt": datetime.datetime.now(),
