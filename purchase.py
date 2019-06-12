@@ -8,12 +8,14 @@ connect = MongoClient(config.MONGODB_URI)
 servicedb = connect[config.SERVICE_MONGODB_NAME]
 
 
+# connect = MongoClient('mongodb://192.168.0.31:32017')
+# servicedb = connect['MOOP_SERVICE']
 # 创建purchase
 def purchaseAdd(data):
-    project = servicedb.project.find_one({'_id': data['project'],"delete": False})
+    project = servicedb.project.find_one({'_id': data['project'], "delete": False})
     if not project:
         return '购买的project不存在'
-    tenant = servicedb.tenant.find_one({'_id': data['purchaser'],"delete": False})
+    tenant = servicedb.tenant.find_one({'_id': data['purchaser'], "delete": False})
     if not tenant:
         return '租户不存在'
     servicedb.purchase.insert(data)
@@ -23,13 +25,13 @@ def purchaseAdd(data):
 def getProject():
     projects = servicedb.project.find({"delete": False})
     for p in projects:
-        print('project编号：{}，标题：{}，github地址：{}'.format(str(p['_id']), str(p['title']), str(p['spec'])))
+        print('project编号：{}，标题：{}，github地址：{}'.format(str(p['_id']), p['title'].encode('utf-8'), str(p['spec'])))
 
 
 def getTenant():
     tenants = servicedb.tenant.find({"delete": False})
     for t in tenants:
-        print('租户编号：{}，名称：{}，namespace：{}'.format(str(t['_id']), str(t['name']), str(t['namespace'])))
+        print('租户编号：{}，名称：{}，namespace：{}'.format(str(t['_id']), t['name'].encode('utf-8'), str(t['namespace'])))
 
 
 if __name__ == '__main__':
@@ -46,11 +48,11 @@ if __name__ == '__main__':
     # limit时间
     limit = raw_input('请输入购买到期时间，格式：2019-05-23  ：')
     try:
-    # 购买purchase
+        # 购买purchase
         data = {
             "purchaser": ObjectId(tenant),
             "project": ObjectId(projectid),
-            "limit":datetime.datetime.strptime(limit, "%Y-%m-%d"),
+            "limit": datetime.datetime.strptime(limit, "%Y-%m-%d"),
             "remark": "",
             "createdAt": datetime.datetime.now(),
             "updatedAt": datetime.datetime.now(),
@@ -60,4 +62,3 @@ if __name__ == '__main__':
         print(result)
     except:
         print('参数错误')
-
